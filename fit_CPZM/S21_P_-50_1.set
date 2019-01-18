@@ -1,0 +1,17 @@
+Filename: S21_P_-50_1.dat
+Timestamp: Sun Oct 13 00:06:02 2013
+
+Instrument: agi
+Instrument: agl
+	IFBW: 3000.0
+	average_factor: 999
+	averaging: True
+	continue_trigger: True
+	freq_cent: 5469900000.0
+	freq_span: 5000000.0
+	freq_start: 7134860000.0
+	freq_stop: 7139860000.0
+	power: -50.0
+	sweep_points: 800
+	trigger_source: INT
+Instrument: yoko1
