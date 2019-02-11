@@ -1,0 +1,80 @@
+fitS21.py
+
+	main function:     
+    		Fit_Resonator(Resonator, Method): input resonator object and method object
+
+process_files.py
+
+        main function:
+		List_resonators(dic,delay): make a list of resonator objects from directory
+
+		MultiFit(dic,list_resonators,method): fit list of resonators with method and save fig in directory
+    
+		Result_dataframe(dic,list_resonators): save fitting results of all resonators to pickle and excel
+
+		temp_log(filepath): create temperature log
+
+		add_Res_temp(df_temp,resonator): add temperature information from temperature log to single resonator
+
+		add_list_Res_temp: add temperature information from temperature log to all resonators
+
+Resonaotr.py
+
+	class:
+		resonator():     
+			required input: freq (GHz), I, Q, power (dbm), electrical delay (ns)
+            			ex: resonator(xdata,y1data,y2data,-50,80.15)
+    			function: load_params, add_temp, power_calibrate
+            
+          			  *load_params: After fitting, load fitting result to resonator object
+            		             input: method ("DCM" or "INV"), fitting result, chi square   
+           		          ex: resonator.load_parameter('DCM',[1,5000,8000,4.56,0.01,1.5], 0.05)
+            
+            			  *add_temp: add temperature (mK) to resonator
+                		  ex: resonator.add_temp(20)
+                
+            			  *power_calibrate: calibrate input line, get input into device
+                              		input [freq_dependence, power_dependence, attenuators]
+                		  ex: resonator.power_calibrate([0,0,0])
+
+		Fit_Method: 
+
+		    method: str
+		            "DCM" or 'INV'
+
+		    extract_factor: number, list, "all"
+	                    fitting range:       
+        	            number ->  number * kappa
+                	    list -> from list[0] to list[1]
+	                    'all' -> all
+    
+    		    MC_iteration: int
+                  	    
+			    Number of iteration of least square fit + Monte Carlo
+    
+    		    MC_rounds: int
+               		    in each iteration, number of rounds of randomly choose parameter
+    
+		    MC_weight: str
+	                    'no' or 'yes', weight the extract_factor fitting range
+    
+		    MC_weightvalue: int
+                	    weighted value
+                    
+		    MC_fix: list of str
+		            'Amp','w1','theta','phi','Qe', 'Q' for DCM, 'Qi' for INV
+    
+		    MC_step_const: int
+	                     randomly choose number in range MC_step_const*[-0.5~0.5] for fitting
+                  
+		    find_circle: bool
+                	     find initial guess from circle or from linewidth         
+    
+		    manual_init: None or list of 6 float number
+                 	     manual input initial guesses
+	                     DCM: [amplitude, Q, Qe, freq, phi, theta]
+	                     INV: [amplitude, Qi, Qe, freq, phi, theta]
+			     CPZM: [amp, Qi, Qe, freq, Qa, theta]	
+
+		    vary: None or list of 6 boolins
+		             vary parameter in least square fit 
