@@ -3,3 +3,4 @@ This repository contains an assortment of superconducting microwave resonator fi
 Links to other resonator fitting codes can be found below:
 
 Karlsruh Institute of Technology (circle fit): https://github.com/qkitgroup/qkit
+BBN-Q (circle fit): https://github.com/BBN-Q/Qlab/tree/develop/analysis/Resonator_fitting
